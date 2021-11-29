@@ -2,29 +2,39 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import {selectCars} from '../features/car/carSlice';
+import {useSelector} from 'react-redux';
+
+
+import { NavLink} from 'react-router-dom';
+
+
 
 
 function Header() {
+    const cars = useSelector(selectCars);
+   
     const [burgerStatus, setBurgerStatus] = useState(false);
     return (
         <Container>
          
-            <a>
+            <NavLink to="/" >
                 <img src="/images/logo.svg" alt="" />
-            </a>
+            </NavLink>
             
            
             <Menu> 
-                    <p> <a href="#"> Model S </a> </p>
-                    <p> <a href="#"> Model 3 </a> </p>
-                    <p> <a href="#"> Model X </a> </p>
-                    <p> <a href="#"> Model Y </a> </p>
+                   
+                     {cars && cars.map((car, index)=>{
+                       return  <a href="#" key={index}> {car} </a>
+                    })}
+                    
             </Menu>
            
 
             <RightMenu>
-                    <a href ="#" alt="">Shop </a>
-                    <a href ="#" alt="">Tesla Account </a>
+                    <NavLink to="shop" >Shop </NavLink>
+                    <NavLink to="tesla-account" >Tesla Account </NavLink>
                     <CustomMenu onClick={() => setBurgerStatus(true)}/>
             </RightMenu> 
 
@@ -32,19 +42,23 @@ function Header() {
                 <CloseWrapper>
                 <CustomClose onClick={() =>setBurgerStatus(false)}/>
                 </CloseWrapper>
-                <li><a href="#">Existing Inventory</a></li>
-                <li><a href="#">Used Inventory</a></li>
-                <li><a href="#">Trade-in</a></li>
-                <li><a href="#">Cybertruck</a></li>
-                <li><a href="#">Roadster</a></li>
-                <li><a href="#">Semi</a></li>
-                <li><a href="#">Charging</a></li>
-                <li><a href="#">Power</a></li>
-                <li><a href="#">Utilities</a></li>
-                <li><a href="#">Test Drive</a></li>
+                {cars && cars.map((car, index)=>{
+                       return     <li key ={index}><NavLink to={car}>{car}</NavLink></li>
+                    })}
+                <li><NavLink to="/">Existing Inventory</NavLink></li>
+                <li><NavLink to="/">Used Inventory</NavLink></li>
+                <li><NavLink to="/">Cybertruck</NavLink></li>
+                <li><NavLink to="/">Roadster</NavLink></li>
+                <li><NavLink to="/">Semi</NavLink></li>
+                <li><NavLink to="/">Charging</NavLink></li>
+                <li><NavLink to="/">Power</NavLink></li>
+                <li><NavLink to="/">Utilities</NavLink></li>
+                <li><NavLink to="/">Trade-in</NavLink></li>
+                <li><NavLink to="/">Test Drive</NavLink></li>
             </BurgerNav>
-
-
+               
+            
+            
             
         </Container>
     )

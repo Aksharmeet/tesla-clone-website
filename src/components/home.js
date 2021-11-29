@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import Section from './section'
-function home() {
+
+function Home() {
     return (
        
         <Container>
+       
             <Section 
             title = "Model S"
             descritpion = "Order Online for Touchless Delivery"
@@ -76,4 +78,4 @@ const Container = styled.div`
 `
 
 
-export default home
+export default Home
